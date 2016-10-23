@@ -1,28 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-class CommonToken(models.Model):
-	""" Many models in our work suite purely 
-		informational purpose and include
-		'name' field and nothing more; we are
-		going to use this class as an ancestor
-		for those models.
-	"""
-	is_active = models.BooleanField(default = True)
-	name = models.CharField(max_length = 100)
-
-class CombatToken(CommonToken):
-	""" Both types of units share basic statistics
-		for combat; they are defined here to 
-		avoid accidental typos
-	"""
-	status = models.CharField(max_length = 100)
-	faction = models.ForeignKey('Faction', blank = True)
-	
-	ws = models.IntegerField(default = 0)
-	bs = models.IntegerField(default = 0)
-	armor = models.IntegerField(default = 0)
-	wounds = models.IntegerField(default = 0)
 	
 class Account(models.Model):
 	# because django already have User interface for auth,
@@ -35,7 +12,12 @@ class Account(models.Model):
 	user = models.OneToOneField(User, on_delete = models.CASCADE)
 	characters = models.ManyToManyField('Character', blank = True)
 
-class Character(CommonToken):
+	def __str__(self):
+		return "{}".format(self.user.username)
+
+class Character(models.Model):
+	is_active = models.BooleanField(default = True)
+	name = models.CharField(max_length = 100)
 	previous_accounts = models.ManyToManyField('Account', blank = True)
 
 	status = models.CharField(max_length = 100)
@@ -51,7 +33,14 @@ class Character(CommonToken):
 	def get_influence(self):
 		pass
 
-class Planet(CommonToken):
+	def __str__(self):
+		return "{name}, {status}".format(name = self.name, status = self.status)
+
+
+class Planet(models.Model):
+	is_active = models.BooleanField(default = True)
+	name = models.CharField(max_length = 100)
+
 	status = models.CharField(max_length = 100)
 	faction = models.ForeignKey('Faction', blank = True)
 	species = models.ForeignKey('PlanetType', blank = True)
@@ -61,17 +50,62 @@ class Planet(CommonToken):
 	def get_influence(self):
 		pass
 
-class PlanetType(CommonToken):
-	pass
-class Species(CommonToken):
-	pass
-class Faction(CommonToken):
-	pass
+	def __str__(self):
+		return "{}".format(self.name)
 
-class Unit(CombatToken):	
+
+class PlanetType(models.Model):
+	is_active = models.BooleanField(default = True)
+	name = models.CharField(max_length = 100)
+
+	def __str__(self):
+		return "{}".format(self.name)
+
+class Species(models.Model):
+	is_active = models.BooleanField(default = True)
+	name = models.CharField(max_length = 100)
+	
+	def __str__(self):
+		return "{}".format(self.name)
+
+class Faction(models.Model):
+	is_active = models.BooleanField(default = True)
+	name = models.CharField(max_length = 100)
+	
+	def __str__(self):
+		return "{}".format(self.name)
+
+class Unit(models.Model):	
+	is_active = models.BooleanField(default = True)
+	name = models.CharField(max_length = 100)
+
+	status = models.CharField(max_length = 100)
+	faction = models.ForeignKey('Faction', blank = True)
+
 	quantity = models.IntegerField(default = 0)
 
-class Ship(CombatToken):
+	ws = models.IntegerField(default = 0)
+	bs = models.IntegerField(default = 0)
+	armor = models.IntegerField(default = 0)
+	wounds = models.IntegerField(default = 0)
+
+	def __str__(self):
+		return "{}".format(self.name)
+
+
+class Ship(models.Model):
+	is_active = models.BooleanField(default = True)
+	name = models.CharField(max_length = 100)
+
+	status = models.CharField(max_length = 100)
+	faction = models.ForeignKey('Faction', blank = True)
+
 	transport_capacity = models.IntegerField(default = 0)
 	move = models.IntegerField(default = 0)	
+	ws = models.IntegerField(default = 0)
+	bs = models.IntegerField(default = 0)
+	armor = models.IntegerField(default = 0)
+	wounds = models.IntegerField(default = 0)
 
+	def __str__(self):
+		return "{}".format(self.name)
