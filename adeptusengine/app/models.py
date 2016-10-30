@@ -21,7 +21,7 @@ class Character(models.Model):
 	previous_accounts = models.ManyToManyField('Account', blank = True)
 
 	status = models.CharField(max_length = 100)
-	faction = models.ForeignKey('Faction', blank = True)
+	faction = models.ManyToManyField('Faction', blank = True)
 	species = models.ForeignKey('Species', blank = True)
 
 	wounds = models.IntegerField(default = 0)
@@ -52,7 +52,6 @@ class Planet(models.Model):
 
 	def __str__(self):
 		return "{}".format(self.name)
-
 
 class PlanetType(models.Model):
 	is_active = models.BooleanField(default = True)
@@ -92,7 +91,6 @@ class Unit(models.Model):
 	def __str__(self):
 		return "{}".format(self.name)
 
-
 class Ship(models.Model):
 	is_active = models.BooleanField(default = True)
 	name = models.CharField(max_length = 100)
@@ -102,6 +100,7 @@ class Ship(models.Model):
 
 	transport_capacity = models.IntegerField(default = 0)
 	move = models.IntegerField(default = 0)	
+	
 	ws = models.IntegerField(default = 0)
 	bs = models.IntegerField(default = 0)
 	armor = models.IntegerField(default = 0)
@@ -109,3 +108,9 @@ class Ship(models.Model):
 
 	def __str__(self):
 		return "{}".format(self.name)
+
+class Event(models.Model):
+	pass
+
+	def __str__(self):
+		return 

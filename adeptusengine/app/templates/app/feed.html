@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %}
+
+{# context:
+	character : models.Character
+#}
+
+{% block content %}
+
+<h2> Имя: {{character.name}} </h2>
+
+<p>Генетический статус: {{character.species.name}}</p>
+<p>Фракции: {% for faction in factions %} {{faction.name}}, {% endfor %}</p>
+<p> Wounds: {{character.wounds}}, Willpower: {{character.willpower}} </p>
+
+<h3> События </h3>
+
+<ul> 
+	{% for event in events %}
+		<li> {{event}} </li>
+	{% endfor %}
+</ul>
+
+<p> TODO else </p>
+
+{% endblock %}

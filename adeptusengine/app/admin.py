@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import *
 
 class CharacterAdmin(admin.ModelAdmin):
-	list_display = ['is_active', 'name', 'faction']
+	list_display = ['name', 'id', 'is_active', 'species']
 
 class PlanetAdmin(admin.ModelAdmin):
 	list_display = ['is_active', 'name', 'host']

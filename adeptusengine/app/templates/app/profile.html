@@ -1,0 +1,24 @@
+{% extends 'app/base.html' %}
+
+{# context:
+	player: models.Account
+	player_characters: list of models.Character
+#}
+
+{% block content %}
+
+<p> player.name = {{player.user.username}}
+
+<p><ul> 
+	{% for char in player_characters %}
+
+		{% if char.is_active %}
+			<li> <a href = "{% url 'app:feed' char.id %}">{{char.name}}</a></li>
+		{% else %}
+			<li> <a href = "{% url 'app:feed' char.id %}" style = 'color: gray'>{{char.name}}</a></li>
+		{% endif %}
+
+	{% endfor %}
+</ul>
+
+{% endblock %}
