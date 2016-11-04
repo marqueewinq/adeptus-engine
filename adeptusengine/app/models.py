@@ -122,13 +122,29 @@ class Ship(models.Model):
     def move(self):
         return self.template.move + self.move_mod
 
+    def bs(self):
+        return self.template.bs + self.bs_mod
+
+    def ws(self):
+        return self.template.ws + self.ws_mod
+
+    def armor(self):
+        return self.template.armor + self.armor_mod
+
+    def wounds(self):
+        return self.template.wounds + self.wounds_mod
+
     def __str__(self):
         return '{name}: {active}\n' \
-               'Stats: m:{move} t:{transport}'.format(
+               'Stats: m:{move} t:{transport} ws:{ws} bs:{bs} a:{armor} w:{wounds}'.format(
                     name=self.name,
                     active='Active' if self.is_active else "Inactive",
                     move=self.move(),
-                    transport=self.transport_capacity())
+                    transport=self.transport_capacity(),
+                    bs=self.bs(),
+                    ws=self.ws(),
+                    armor=self.armor(),
+                    wounds=self.wounds())
 
 
 class ShipTemplate(models.Model):
