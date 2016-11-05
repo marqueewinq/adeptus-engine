@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^$', app_views.index, name = 'index'),
     url(r'^login/$', app_views.login, name = 'login'),
     url(r'^profile/$', app_views.profile, name = 'profile'),
+    url(r'^ships/$', app_views.shipslookup, name = 'ships'),
     url(r'^feed/(?P<char_id>[0-9]+)/$', app_views.feed, name = 'feed'),
 ]

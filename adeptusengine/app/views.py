@@ -46,6 +46,13 @@ def feed(request, char_id):
     return render(request, template, context)
 
 
+@login_required(login_url = '/login/')
+def shipslookup(request):
+    context = {
+        "ships": Ship.objects.all()
+        }
+    template = 'app/ship.html'
+    return render(request, template, context)
 
 
 

@@ -1,26 +1,38 @@
 from django.contrib import admin
 from .models import *
 
+
 class CharacterAdmin(admin.ModelAdmin):
-	list_display = ['name', 'id', 'is_active', 'species']
+    list_display = ['name', 'id', 'is_active', 'species']
+
 
 class PlanetAdmin(admin.ModelAdmin):
-	list_display = ['is_active', 'name', 'host']
+    list_display = ['is_active', 'name', 'host']
+
 
 class PlanetTypeAdmin(admin.ModelAdmin):
-	list_display = ['name', ]
+    list_display = ['name', ]
+
 
 class SpeciesAdmin(admin.ModelAdmin):
-	list_display = ['name', ]
+    list_display = ['name', ]
+
 
 class FactionAdmin(admin.ModelAdmin):
-	list_display = ['name', ]
+    list_display = ['name', ]
 
-class UnitAdmin(admin.ModelAdmin):	
-	list_display = ['name', 'faction']
+
+class UnitAdmin(admin.ModelAdmin):
+    list_display = ['name', 'faction']
+
 
 class ShipAdmin(admin.ModelAdmin):
-	list_display = ['name', 'faction']
+    list_display = ['name', 'faction']
+
+
+class ShipTemplateAdmin(admin.ModelAdmin):
+    list_display = ['name', ]
+
 
 admin.site.register(Account)
 admin.site.register(Character, CharacterAdmin)
@@ -30,3 +42,4 @@ admin.site.register(Species, SpeciesAdmin)
 admin.site.register(Faction, FactionAdmin)
 admin.site.register(Unit, UnitAdmin)
 admin.site.register(Ship, ShipAdmin)
+admin.site.register(ShipTemplate, ShipTemplateAdmin)

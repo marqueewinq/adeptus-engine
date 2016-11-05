@@ -1,0 +1,16 @@
+{% extends 'app/base.html' %}
+
+{# context:
+	ships: list of models.Ship
+#}
+
+{% block content %}
+
+
+<ul>
+	{% for ship in ships %}
+		<li> {{ship}} </li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
